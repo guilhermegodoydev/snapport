@@ -10,8 +10,8 @@ Obrigado por se interessar em contribuir! O **Snap-Port** é um projeto **Open S
 2. **Clone** o seu fork:
    
    ```bash
-   git clone https://github.com
-   cd snap-port
+   git clone https://github.com/guilhermegodoydev/snapport.git
+   cd snapport
    ```
    
 3. **Instale as dependências** (utilizamos o Vite para o ambiente de dev)
