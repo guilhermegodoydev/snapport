@@ -145,6 +145,6 @@ Para detalhes sobre como contribuir, consulte o [**Guia de Contribuição.**](ht
 
 ---
 
-**Autor:** Guilherme Godoy ([@guilhermegodoydev](https://github.com/guilhermegodoydev)) • **Licença:** MIT • **Peso:** 2.8kB gzipped
+**Autor:** Guilherme Godoy ([@guilhermegodoydev](https://github.com/guilhermegodoydev)) • **Licença:** MIT • **Peso:** 3.07kB gzipped
 
 
