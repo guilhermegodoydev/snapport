@@ -1,60 +1,67 @@
 # Guia de Contribuição do Snap-Port 🤝
 
-Obrigado por se interessar em contribuir com o **Snap-Port**!  
-Este é um projeto **MVP**, e toda ajuda para torná-lo mais robusto, rápido e acessível é muito bem-vinda.
-
-Para manter a qualidade e a leveza da biblioteca, seguimos algumas diretrizes.
+Obrigado por se interessar em contribuir! O **Snap-Port** é um projeto **Open Source em TypeScript** e toda ajuda para torná-lo mais robusto e leve é bem-vinda.
 
 ---
 
 ## 🚀 Como começar
 
-1. **Faça um fork do projeto**
-
-2. **Clone o seu fork**
-  ```bash
-   git clone https://github.com/seuuser/snap-port.git
-   cd snap-port
-  ```
-
-3. **Instale as dependências de desenvolvimento**
+1. **Faça um fork** do projeto no GitHub.
+2. **Clone** o seu fork:
+   
    ```bash
-     npm install
+   git clone https://github.com
+   cd snap-port
    ```
- 4. **Inicie o servidor de desenvolvimento**
+   
+3. **Instale as dependências** (utilizamos o Vite para o ambiente de dev)
+   
+   ```bash
+   npm install
+   ```
+   
+ 4. **Inicie o servidor de desenvolvimento:**
     ```bash
-      npm run dev
+    npm run dev
     ```
+    
+---
 
-## 🌿 Fluxo de Contribuição
+## 🌿 Fluxo de Trabalho
 
-1. **Crie uma branch para sua mudança**
+1. **Crie uma branch** para sua modificação:
+   ```bash
+     git checkout -b feat/minha-melhoria
+   ```
+
+2. **Desenvolva sua solução:**
+   1. Mantenha o padrão de **TypeScript.**
+   2. Evite adicionar dependências externas para manter a lib leve (~3kB).
+
+3. **Valide o Build:**
+  Antes de enviar, garanta que o TypeScript e o Vite conseguem compilar o projeto sem erros:
+
   ```bash
-    git checkout -b minha-melhoria
+  npm run build
   ```
 
-2. **Faça suas alterações**
-  - Mantenha o estilo de código existente
-  - Foque em pequenas melhorias ou funcionalidades claras
+4. **Abra um Pull Request:**
+  1. Descreva suas mudanças e o porquê delas.
+  2. Se corrigiu um bug, mencione a Issue correspondente.
 
-3. **Teste suas alterações**
-  - Certifique-se de que os componentes continuam funcionando
-  - Atualize exemplos ou documentação, se necessário
+---
 
-4. **Abra um Pull Request**
-  - Descreva suas mudanças detalhadamente
-  - Relacione a Issue correspondente, se houver
+## 📌 Diretrizes de Código
 
-## 📌 Diretrizes
+- **Tipagem Estrita:** Sempre defina interfaces para novos dados no arquivo ``types.ts``.
+- **Resiliência:** Se criar um novo componente de UI, garanta que ele tenha tratamento de erro (fallback).
+- **CSS Variables:** Use as variáveis existentes (``--ghp-accent``, etc.) para manter a consistência do tema.
+- **Simplicidade:** O Snap-Port preza pelo lema "Plug & Play". Evite configurações complexas para o usuário final.
 
-- Mantenha mudanças pequenas e objetivas
-- Evite alterar funcionalidades que já funcionam sem necessidade
-- Use comentários claros no código
-- Respeite a semântica das tags do GitHub (port, react, etc.)
-- Certifique-se de que o código funciona tanto via NPM quanto CDN
+---
 
-## ⚠️ Aviso de Manutenção
+## ⚠️ Nota de Manutenção
 
-> Snap-Port é mantido pelo autor no tempo livre.
-> Mudanças na API do GitHub ou na biblioteca podem ocorrer sem aviso prévio.
-> Contribuições são bem-vindas, mas não há garantia de suporte contínuo.
+O Snap-Port é um projeto MVP mantido de forma independente. Contribuições que foquem em performance, correção de bugs de API e acessibilidade têm prioridade na revisão.
+
+> Dica: Se você deseja propor uma mudança grande na arquitetura, abra uma Issue para discutirmos a ideia antes de você começar a codar!
