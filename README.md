@@ -1,57 +1,48 @@
 # Snap-Port 🚀
-O **Snap-Port** é uma biblioteca **vanilla JavaScript**, sem dependências, pensada para desenvolvedores que desejam automatizar a exibição de projetos do GitHub em sites pessoais ou portfólios.
+O **Snap-Port** é uma biblioteca desenvolvida em **TypeScript**, sem dependências externas, projetada para automatizar a exibição de projetos do GitHub em sites pessoais ou portfólios.
 
-A proposta é simples: você marca seus repositórios com a tag ``port`` no GitHub, e o Snap-Port se encarrega de **buscar, cachear, filtrar e renderizar** esses projetos na sua interface — eliminando a necessidade de atualizações manuais no código do site.
-
-> **Use o GitHub como fonte única de verdade para o seu portfólio.**
+A proposta central é utilizar o GitHub como **fonte única de verdade:** ao marcar seus repositórios com a tag escolhida, a biblioteca se encarrega de buscar, tratar, aplicar cache e renderizar os dados, eliminando a manutenção manual no código do seu site.
 
 ---
 
-## 🛠 O que a biblioteca oferece?
+## 🛠 Funcionalidades Técnicas
 
-A biblioteca foi desenhada para ser modular, funcionando tanto como um **motor de dados (headless)** quanto como uma **solução visual pronta para uso.**
+### 1. Seleção de Projetos e Controle de Stacks
+O Snap-Port oferece controle total sobre o que é exibido e como as tecnologias são categorizadas:
 
-### 1. Camada de Dados (Headless)
+- **Tag de Descoberta**: Por padrão, a biblioteca busca repositórios com a tag ``port``, mas você pode definir qualquer outra tag no momento da inicialização.
+- **Filtros por Stacks (Topics):** Para que os filtros automáticos e a barra de busca funcionem corretamente, você deve listar as tecnologias (ex: ``react``, ``nodejs``, ``css``) nos topics do seu repositório no GitHub.
+- **Por que não usar a "Language" automática?** A lib ignora o campo ``language`` do GitHub para permitir que você decida quais ferramentas quer destacar. Isso evita que um projeto de React seja classificado apenas como "HTML" ou "JavaScript" devido ao volume de arquivos gerados por ferramentas de build, garantindo que o filtro reflita a stack real do projeto.
 
-Se você já possui seu próprio layout ou utiliza frameworks como **React** ou **Vue**, pode consumir apenas a lógica de dados.
+### 2. Gestão Inteligente de Imagens
+Como a API do GitHub não retorna links diretos de imagens de preview, o Snap-Port utiliza uma lógica de **geração automática** integrada aos componentes de UI.
 
-O método ``getPortProjects`` retorna um JSON tratado, abstraindo o ruído da API do GitHub e entregando apenas o essencial:
+Para que cada projeto tenha sua própria imagem, siga estas regras:
 
-- Nome
-- Descrição
-- Tópicos
-- Link do repositório
-- Link de deploy
-- Linguagem principal
+- **Arquivo de Preview:** Você deve criar um arquivo chamado ``preview.png`` na raiz do seu repositório.
+- **Importante:** O nome deve ser exatamente preview.png (letras minúsculas), pois o GitHub diferencia maiúsculas de minúsculas (*case-sensitive*).
 
-Exemplo básico de uso:
-  ```bash
-    import { getPortProjects } from 'snap-port';
+Caso o arquivo não exista ou ocorra algum erro de carregamento (como *Rate Limits*), a lib executa uma **estratégia de fallback em cascata:**
 
-    const projects = await getPortProjects('seu-usuario', 'topic-tag');
-  ```
+- **GitHub Open Graph:** Tenta carregar o card dinâmico gerado pelo próprio GitHub.
+- **Placeholder de Segurança:** Se o GitHub bloquear a requisição, gera um card neutro contendo o nome do projeto via placehold.co.
 
----
+### 3. Componentes de UI Integrados
 
-### 2. Componentes de UI (Plug & Play)
-
-Para quem busca agilidade, o Snap-Port oferece componentes de interface prontos, que podem ser usados sem frameworks:
-
-- **Search Bar**  
-  Filtro textual instantâneo que atua sobre os dados em cache.
-
-- **Filter Carousel**  
-  Carrossel horizontal de tecnologias que identifica automaticamente suas stacks a partir dos tópicos do GitHub.
-
-- **Project Cards**  
-  Cards minimalistas que incluem:
-  - Social Preview (imagem do repositório)
-  - Descrição com limite de linhas
-  - Botões de ação para código-fonte e deploy
+- **Search Bar:** Filtro textual em tempo real (nome, descrição e tópicos).
+- **Filter** Carousel: Carrossel dinâmico baseado nos tópicos definidos nos repositórios.
+- **Project Cards (Layout 16:9):** Cards responsivos com badges de tecnologia e botões de ação (Código e Deploy).
 
 ---
 
-## 🚀 Instalação e Uso
+##💡 Dicas para um melhor Resultado
+
+- **Proporção de Imagem:** Para que as imagens não fiquem com partes cortadas nos cards, salve seus arquivos ``preview.png`` na proporção **16:9** (ex: 1280x720px).
+- **Link de Acesso (Deploy):** O botão "Acessar" só aparecerá se o campo **"Homepage"** estiver preenchido nas configurações do seu repositório no GitHub.
+
+---
+
+## 📦 Instalação e Integração
 
 ### Via NPM
 
@@ -60,91 +51,44 @@ npm install snap-port
 ```
 
 ### Via CDN (Direto no HTML)
-Se preferir não usar gerenciadores de pacotes, você pode importar os arquivos de distribuição diretamente:
 
-```bash
-<!-- Estilos da Lib -->
-<link rel="stylesheet" href="https://unpkg.com/snap-port/dist/snap-port.css">
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net">
 
-<!-- Lógica da Lib -->
 <script type="module">
-  import { initPortfolio } from 'https://unpkg.com/snap-port/dist/snap-port.js';
+  import { initPortfolio } from 'https://cdn.jsdelivr.net';
 
   initPortfolio('seu-usuario', {
-    search: 'id-do-input',
-    filters: 'id-container-dos-filtros',
-    projects: 'id-do-grid'
+    searchContainer: 'id-search',
+    filtersContainer: 'id-filters',
+    projectsContainer: 'id-projects'
+    // tag: 'sua-tag-customizada' (Opcional, padrão é 'port')
   });
 </script>
 ```
 
-## ⚙️ Customização e Comportamento
-
-### Gerenciamento de Tags e Imagens
-
-A biblioteca utiliza os **topics** do seu repositório para duas funções:
-
-- **Filtro de Descoberta**  
-  Apenas repositórios com a tag **`port`** são processados.
-
-- **Identidade Visual**  
-  Tags como `react`, `nodejs` ou `typescript` são mapeadas para seus respectivos ícones e cores oficiais.
-
-- **Imagens**  
-  O Snap-Port consome o **Open Graph** do repositório para exibir automaticamente a imagem de preview do projeto.
-
 ---
 
-### Cache, Performance e Rate Limit
+## ⚙️ Customização e Performance
 
-Para evitar chamadas excessivas à API do GitHub e reduzir impactos de **rate limit**, o Snap-Port implementa um **sistema de cache inteligente baseado em ``localStorage``**.
+### Injeção de Template Customizado
+Mantenha a inteligência de busca e cache, mas use seu próprio design:
 
-Esse sistema:
-
-- Armazena os dados tratados por usuário de forma isolada, evitando conflitos quando múltiplos portfólios utilizam a biblioteca no mesmo ambiente (ex: recrutadores abrindo vários ports).
-
-- Possui ciclo de expiração automática, garantindo que os dados sejam atualizados periodicamente (entre 1 e 2 horas).
-
-- Realiza limpeza automática de entradas antigas, funcionando como um garbage collector manual, evitando crescimento indefinido do localStorage.
-
-- Trata casos de borda para impedir reutilização indevida de cache entre usuários diferentes.
-
-Na prática, isso garante:
-
-- Melhor performance,
-
-- Menos requisições,
-
-- E maior previsibilidade no consumo da API do GitHub.
-
----
-
-### Estilização
-
-A interface é construída com **variáveis CSS**, permitindo que você adapte as cores ao seu tema sem modificar o código interno:
-
-```css
-:root {
-  --ghp-accent: #333;   /* Cor de destaque (botões ativos e ícones) */
-  --ghp-bg: #fff;       /* Fundo dos cards */
-  --ghp-border: #ddd;   /* Bordas e divisores */
-}
+```javascript
+initPortfolio('seu-usuario', {
+  customCardTemplate: (repo) => `<div class="card"><h4>${repo.name}</h4></div>`
+});
 ```
 
-## ⚠️ Status do Projeto e Contribuições
+### Cache e Estabilidade
+A biblioteca utiliza localStorage para garantir performance:
 
-Este projeto está em sua fase **MVP (Minimum Viable Product)**.  
-
-Atualmente, os componentes de UI compartilham estado interno para otimizar filtragem e performance.
-
-> Este projeto é mantido no tempo livre e não possui garantias de suporte contínuo. Mudanças na API do GitHub ou na própria biblioteca podem ocorrer sem aviso prévio.
-
-Sugestões, ideias de funcionalidades e relatos de bugs são bem-vindos.
-Sinta-se à vontade para abrir uma **Issue** ou enviar um **Pull Request**.
-Para detalhes sobre como contribuir, consulte o [**Guia de Contribuição.**](https://github.com/guilhermegodoydev/snap-port/blob/main/CONTRIBUTING.md)
+- **Persistência:** Dados armazenados por até 2 horas.
+- **Isolamento:** Cache separado por usuário do GitHub.
 
 ---
 
-**Autor:** Guilherme Godoy ([@guilhermegodoydev](https://github.com/guilhermegodoydev)) • **Licença:** MIT • **Peso:** 3.07kB gzipped
+⚠️ Status do Projeto
+Este projeto está em fase **v0.1.0 (MVP).**
 
-
+**Autor**: Guilherme Godoy (@guilhermegodoydev) • **Licença**: MIT • **Peso**: ~3.12kB (Gzipped)
