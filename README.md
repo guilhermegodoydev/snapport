@@ -35,7 +35,7 @@ Caso o arquivo não exista ou ocorra algum erro de carregamento (como *Rate Limi
 
 ---
 
-##💡 Dicas para um melhor Resultado
+## 💡 Dicas para um melhor Resultado
 
 - **Proporção de Imagem:** Para que as imagens não fiquem com partes cortadas nos cards, salve seus arquivos ``preview.png`` na proporção **16:9** (ex: 1280x720px).
 - **Link de Acesso (Deploy):** O botão "Acessar" só aparecerá se o campo **"Homepage"** estiver preenchido nas configurações do seu repositório no GitHub.
