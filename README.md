@@ -53,18 +53,32 @@ npm install snap-port
 ### Via CDN (Direto no HTML)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net">
-
 <script type="module">
   import { initPortfolio } from 'https://cdn.jsdelivr.net';
 
   initPortfolio('seu-usuario', {
-    searchContainer: 'id-search',
-    filtersContainer: 'id-filters',
-    projectsContainer: 'id-projects'
-    // tag: 'sua-tag-customizada' (Opcional, padrão é 'port')
+    tag: 'minha-tag',                 // Opcional: padrão é 'port'
+    searchContainer: 'id-search',     // ID do container da busca
+    filtersContainer: 'id-filters',   // ID do container dos filtros
+    projectsContainer: 'id-projects'  // ID do container do grid
   });
 </script>
+```
+
+---
+
+## 🎨 Personalização Visual (CSS Variables)
+Se você utiliza o layout padrão da biblioteca, pode adaptar as cores e o estilo ao seu tema sem modificar o código interno. O Snap-Port utiliza **Variáveis CSS** que podem ser facilmente sobrescritas no seu arquivo global:
+
+```css
+:root {
+  --ghp-accent: #333;           /* Cor de destaque (botões e ícones) */
+  --ghp-bg: #ffffff;            /* Fundo dos cards */
+  --ghp-text: #333;             /* Título e textos principais */
+  --ghp-text-light: #666;       /* Descrições e textos secundários */
+  --ghp-border: rgba(226, 226, 228, 0.8); /* Bordas */
+  --ghp-shadow: rgba(0, 0, 0, 0.1);       /* Sombras dos cards */
+}
 ```
 
 ---
@@ -76,7 +90,16 @@ Mantenha a inteligência de busca e cache, mas use seu próprio design:
 
 ```javascript
 initPortfolio('seu-usuario', {
-  customCardTemplate: (repo) => `<div class="card"><h4>${repo.name}</h4></div>`
+  searchContainer: 'id-search',
+  filtersContainer: 'id-filters',
+  projectsContainer: 'id-projects',
+  customCardTemplate: (repo) => `
+    <div class="meu-card-personalizado">
+      <h4>${repo.name}</h4>
+      <p>${repo.description}</p>
+      <a href="${repo.htmlUrl}">Ver código</a>
+    </div>
+  `
 });
 ```
 
@@ -89,6 +112,11 @@ A biblioteca utiliza localStorage para garantir performance:
 ---
 
 ⚠️ Status do Projeto
-Este projeto está em fase **v0.1.0 (MVP).**
+Este projeto está em fase **v0.1.0 (MVP).** Ele foi desenvolvido para resolver uma necessidade real de automação de portfólios e continuará recebendo melhorias conforme o uso.
+
+> **Nota sobre Manutenção:**  
+> Este é um projeto de código aberto mantido de forma independente. Sinta-se à vontade para contribuir! Se encontrar um bug ou tiver uma ideia de funcionalidade, abrir uma **Issue** ou um **Pull Request** é a melhor forma de ajudar o projeto a crescer.
+>
+> Para entender como colaborar com o código, consulte o nosso [**Guia de Contribuição**](./CONTRIBUTING.md).
 
 **Autor**: Guilherme Godoy (@guilhermegodoydev) • **Licença**: MIT • **Peso**: ~3.12kB (Gzipped)
