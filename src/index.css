@@ -1,0 +1,234 @@
+:root {
+  --ghp-accent: #333;
+  --ghp-bg: #ffffff;
+  --ghp-border: rgba(226, 226, 228, 0.8);
+  --ghp-shadow: rgba(0, 0, 0, 0.1);
+  --ghp-text: #333;
+  --ghp-text-light: #666;
+}
+
+.ghp-search-input,
+.ghp-filter-btn,
+.ghp-card-links a {
+  transition: all 0.2s ease;
+}
+
+.ghp-search-container {
+  position: relative;
+  margin: 0 15px 20px 15px;
+  max-width: 400px;
+}
+
+.ghp-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+.ghp-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 38px;
+  border: 1px solid var(--ghp-border);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.ghp-search-input:focus {
+  border-color: var(--ghp-accent);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.ghp-filters-content {
+  display: flex;
+  gap: 12px;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.ghp-filters-content::-webkit-scrollbar {
+  display: none;
+}
+
+.ghp-filter-btn {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--ghp-bg);
+  padding: 8px 16px;
+  border: solid 2px #e1e4e8;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.ghp-filter-btn img,
+.ghp-filter-btn svg {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.ghp-filter-btn p {
+  margin: 0;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .ghp-filters-content {
+    gap: 8px;
+    padding: 8px;
+  }
+}
+
+.ghp-filter-btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--tech-color, var(--ghp-accent));
+  color: var(--tech-color, var(--ghp-accent));
+  box-shadow: 0 4px 8px var(--ghp-shadow);
+}
+
+.ghp-filter-btn.active {
+  background-color: var(--tech-color, var(--ghp-accent));
+  color: white;
+  border-color: var(--tech-color, var(--ghp-accent));
+}
+
+.ghp-filter-btn.active img {
+  filter: brightness(0) invert(1);
+}
+
+.ghp-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 15px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .ghp-projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+.ghp-project-card {
+  background-color: var(--ghp-bg);
+  border-radius: 12px;
+  border: solid 1px var(--ghp-border);
+  box-shadow: 0 2px 5px var(--ghp-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+  height: 100%;
+  min-height: 220px;
+}
+
+.ghp-img-container, .ghp-card-img {
+  border-radius: 8px 8px 0 0;
+}
+
+.ghp-img-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #161b22;
+  border-bottom: 1px solid var(--ghp-border);
+  overflow: hidden;
+}
+
+.ghp-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.ghp-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 20px;
+}
+
+.ghp-skeleton-card {
+    height: 220px;
+    width: 100%;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+}
+
+.ghp-project-card:hover {
+  transform: translateY(-5px);
+}
+
+.ghp-project-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.ghp-project-card p {
+  font-size: 14px;
+  color: var(--ghp-text-light);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+}
+
+.ghp-card-links {
+  display: flex;
+  gap: 10px;
+}
+
+.ghp-card-links a {
+  text-decoration: none;
+  padding: 6px 14px;
+  color: var(--ghp-text);
+  font-size: 13px;
+  font-weight: 500;
+  border: solid 1px var(--ghp-border);
+  border-radius: 20px;
+  background-color: #f6f8fa;
+}
+
+.ghp-card-links a:hover {
+  background-color: var(--ghp-accent);
+  color: white;
+  border-color: var(--ghp-accent);
+}
+
+.ghp-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e6e6e6 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: ghp-loading 1.5s infinite ease-in-out;
+  border-radius: 4px;
+}
+
+@keyframes ghp-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.ghp-skeleton-card {
+  height: 200px;
+  width: 100%;
+  border-radius: 12px;
+}
