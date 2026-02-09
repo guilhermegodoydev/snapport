@@ -47,17 +47,21 @@ Caso o arquivo não exista ou ocorra algum erro de carregamento (como *Rate Limi
 ### Via NPM
 
 ```bash
-npm install snap-port
+npm install snapport
 ```
 
 ### Via CDN (Direto no HTML)
 
 ```html
+<!-- 1. Estilos da Biblioteca -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net">
+
+<!-- 2. Lógica e Inicialização -->
 <script type="module">
   import { initPortfolio } from 'https://cdn.jsdelivr.net';
 
   initPortfolio('seu-usuario', {
-    tag: 'minha-tag',                 // Opcional: padrão é 'port'
+    tag: 'port',                      // Opcional: padrão é 'port'
     searchContainer: 'id-search',     // ID do container da busca
     filtersContainer: 'id-filters',   // ID do container dos filtros
     projectsContainer: 'id-projects'  // ID do container do grid
