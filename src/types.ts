@@ -8,6 +8,7 @@ export interface SanitizedRepo {
 }
 
 export interface PortfolioConfig {
+    tag?: string;
     searchContainer: string;
     filtersContainer: string;
     projectsContainer: string;

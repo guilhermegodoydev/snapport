@@ -30,10 +30,13 @@ export async function initPortfolio(
   }
 ): Promise<PortfolioResponse> {
   try {
+
+    const tag = config.tag || 'port';
+
     uiSearch(config.searchContainer);
     renderSkeleton(config.projectsContainer, 6);
 
-    const projects = await fetchProjects(username);
+    const projects = await fetchProjects(username, tag);
 
     uiFilters(projects, config.filtersContainer);
     uiProjects(projects, config.projectsContainer, username, config.customCardTemplate);
