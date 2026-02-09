@@ -51,14 +51,16 @@ npm install snapport
 ```
 
 ### Via CDN (Direto no HTML)
+Se você preferir não usar gerenciadores de pacotes, pode importar os arquivos diretamente de um CDN. Recomendamos o uso de type="module" para melhor compatibilidade com o padrão moderno da biblioteca.
 
 ```html
 <!-- 1. Estilos da Biblioteca -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/snapport/dist/snap-port.css">
 
 <!-- 2. Lógica e Inicialização -->
 <script type="module">
-  import { initPortfolio } from 'https://cdn.jsdelivr.net';
+  // Importação do módulo oficial ES
+  import { initPortfolio } from 'https://cdn.jsdelivr.net/npm/snapport/dist/snap-port.js';
 
   initPortfolio('seu-usuario', {
     tag: 'port',                      // Opcional: padrão é 'port'
