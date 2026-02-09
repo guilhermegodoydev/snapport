@@ -15,7 +15,7 @@
       "import": "./dist/snap-port.js",
       "require": "./dist/snap-port.umd.cjs"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/snap-port.css"
   },
   "scripts": {
     "dev": "vite",
