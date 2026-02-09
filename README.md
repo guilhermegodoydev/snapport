@@ -118,7 +118,7 @@ A biblioteca utiliza localStorage para garantir performance:
 ---
 
 ⚠️ Status do Projeto
-Este projeto está em fase **v0.1.0 (MVP).** Ele foi desenvolvido para resolver uma necessidade real de automação de portfólios e continuará recebendo melhorias conforme o uso.
+Este projeto está em fase **MVP.** Ele foi desenvolvido para resolver uma necessidade real de automação de portfólios e continuará recebendo melhorias conforme o uso.
 
 > **Nota sobre Manutenção:**  
 > Este é um projeto de código aberto mantido de forma independente. Sinta-se à vontade para contribuir! Se encontrar um bug ou tiver uma ideia de funcionalidade, abrir uma **Issue** ou um **Pull Request** é a melhor forma de ajudar o projeto a crescer.
