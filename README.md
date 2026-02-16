@@ -1,7 +1,13 @@
-![NPM Downloads](https://img.shields.io/npm/dm/snapport?style=for-the-badge&logo=npm)
-![NPM Version](https://img.shields.io/npm/v/snapport?style=for-the-badge)
-![License](https://img.shields.io/github/license/guilhermegodoydev/snapport?style=for-the-badge)
-![Bundle Size](https://img.shields.io/bundlephobia/min/snapport?style=for-the-badge)
+<p align="center">
+  <a href="./README.pt-br.md">Leia isto em Português</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/npm/dm/snapport?style=for-the-badge&logo=npm" alt="NPM Downloads">
+  <img src="https://img.shields.io/npm/v/snapport?style=for-the-badge" alt="NPM Version">
+  <img src="https://img.shields.io/github/license/guilhermegodoydev/snapport?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/bundlephobia/min/snapport?style=for-the-badge" alt="Bundle Size">
+</p>
 
 # Snap-Port 🚀
 
