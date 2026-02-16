@@ -1,4 +1,11 @@
+![NPM Downloads](https://img.shields.io/npm/dm/snapport?style=for-the-badge&logo=npm)
+![NPM Version](https://img.shields.io/npm/v/snapport?style=for-the-badge)
+![License](https://img.shields.io/github/license/guilhermegodoydev/snapport?style=for-the-badge)
+![Bundle Size](https://img.shields.io/bundlephobia/min/snapport?style=for-the-badge)
+
+
 # Snap-Port 🚀
+
 O **Snap-Port** é uma biblioteca desenvolvida em **TypeScript**, sem dependências externas, projetada para automatizar a exibição de projetos do GitHub em sites pessoais ou portfólios.
 
 A proposta central é utilizar o GitHub como **fonte única de verdade:** ao marcar seus repositórios com a tag escolhida, a biblioteca se encarrega de buscar, tratar, aplicar cache e renderizar os dados, eliminando a manutenção manual no código do seu site.
@@ -117,12 +124,9 @@ A biblioteca utiliza localStorage para garantir performance:
 
 ---
 
-⚠️ Status do Projeto
-Este projeto está em fase **MVP.** Ele foi desenvolvido para resolver uma necessidade real de automação de portfólios e continuará recebendo melhorias conforme o uso.
-
 > **Nota sobre Manutenção:**  
 > Este é um projeto de código aberto mantido de forma independente. Sinta-se à vontade para contribuir! Se encontrar um bug ou tiver uma ideia de funcionalidade, abrir uma **Issue** ou um **Pull Request** é a melhor forma de ajudar o projeto a crescer.
 >
 > Para entender como colaborar com o código, consulte o nosso [**Guia de Contribuição**](./CONTRIBUTING.md).
 
-**Autor**: Guilherme Godoy (@guilhermegodoydev) • **Licença**: MIT • **Peso**: ~3.12kB (Gzipped)
+**Autor**: Guilherme Godoy (@guilhermegodoydev)
