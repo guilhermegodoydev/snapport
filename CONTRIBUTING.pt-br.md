@@ -57,7 +57,6 @@ Obrigado por se interessar em contribuir! O **Snap-Port** é um projeto **Open S
 
 ## 📌 Diretrizes de Código
 
-- **Tipagem Estrita:** Sempre defina interfaces para novos dados no arquivo ``types.ts``.
 - **Resiliência:** Se criar um novo componente de UI, garanta que ele tenha tratamento de erro (fallback).
 - **CSS Variables:** Use as variáveis existentes (``--ghp-accent``, etc.) para manter a consistência do tema.
 - **Simplicidade:** O Snap-Port preza pelo lema "Plug & Play". Evite configurações complexas para o usuário final.
