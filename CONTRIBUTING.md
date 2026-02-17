@@ -1,67 +1,70 @@
-# Guia de Contribuição do Snap-Port 🤝
+<p align="center">
+  <a href="./CONTRIBUTING.pt-br.md">Leia isto em Português</a>
+</p>
 
-Obrigado por se interessar em contribuir! O **Snap-Port** é um projeto **Open Source em TypeScript** e toda ajuda para torná-lo mais robusto e leve é bem-vinda.
+# Snap-Port Contributing Guide 🤝
+
+Thank you for your interest in contributing! **Snap-Port** is an **Open Source TypeScript** project, and any help in making it more robust and lightweight is highly appreciated.
 
 ---
 
-## 🚀 Como começar
+## 🚀 Getting Started
 
-1. **Faça um fork** do projeto no GitHub.
-2. **Clone** o seu fork:
+1. **Fork** the project on GitHub.
+2. **Clone** your fork:
    
    ```bash
-   git clone https://github.com/guilhermegodoydev/snapport.git
+   git clone https://github.com
    cd snapport
    ```
-   
-3. **Instale as dependências** (utilizamos o Vite para o ambiente de dev)
-   
+3. **Install dependencies** (we use Vite for the development environment):
+
    ```bash
    npm install
    ```
-   
- 4. **Inicie o servidor de desenvolvimento:**
-    ```bash
-    npm run dev
-    ```
-    
----
 
-## 🌿 Fluxo de Trabalho
+4. **Start the development server:**
 
-1. **Crie uma branch** para sua modificação:
    ```bash
-     git checkout -b feat/minha-melhoria
+   npm run dev
    ```
 
-2. **Desenvolva sua solução:**
-   1. Mantenha o padrão de **TypeScript.**
-   2. Evite adicionar dependências externas para manter a lib leve (~3kB).
+---
 
-3. **Valide o Build:**
-  Antes de enviar, garanta que o TypeScript e o Vite conseguem compilar o projeto sem erros:
+## 🌿 Workflow
 
-  ```bash
-  npm run build
-  ```
+1. **Create a branch** for your changes:
 
-4. **Abra um Pull Request:**
-  1. Descreva suas mudanças e o porquê delas.
-  2. Se corrigiu um bug, mencione a Issue correspondente.
+   ```bash
+     git checkout -b feat/my-improvement
+   ```
+   
+2. **Develop your solution:**
+   1. Maintain **TypeScript** standards.
+   2. Avoid adding external dependencies to keep the library lightweight (~3kB).
+
+2. **Validate the Build:**
+   Before submitting, ensure that TypeScript and Vite can compile the project without errors:
+
+   ```bash
+   npm run build
+   ```
+
+4. **Open a Pull Request:**
+   1. Describe your changes and the reasoning behind them.
+   2. If you fixed a bug, mention the corresponding Issue.
+  
+---
+
+## 📌 Coding Guidelines
+
+- **Resilience:** If creating a new UI component, ensure it has proper error handling (fallback).
+- **CSS Variables:** Use existing variables (``--ghp-accent``, etc.) to maintain theme consistency.
+- **Simplicity:** Snap-Port values the "Plug & Play" philosophy. Avoid complex configurations for the end user.
 
 ---
 
-## 📌 Diretrizes de Código
+## ⚠️ Maintenance Note
+Snap-Port is an independently maintained project. Contributions focusing on performance, API bug fixes, and accessibility have priority in the review process.
 
-- **Tipagem Estrita:** Sempre defina interfaces para novos dados no arquivo ``types.ts``.
-- **Resiliência:** Se criar um novo componente de UI, garanta que ele tenha tratamento de erro (fallback).
-- **CSS Variables:** Use as variáveis existentes (``--ghp-accent``, etc.) para manter a consistência do tema.
-- **Simplicidade:** O Snap-Port preza pelo lema "Plug & Play". Evite configurações complexas para o usuário final.
-
----
-
-## ⚠️ Nota de Manutenção
-
-O Snap-Port é um projeto mantido de forma independente. Contribuições que foquem em performance, correção de bugs de API e acessibilidade têm prioridade na revisão.
-
-> Dica: Se você deseja propor uma mudança grande na arquitetura, abra uma Issue para discutirmos a ideia antes de você começar a codar!
+> **Tip:** If you wish to propose a major architectural change, please open an Issue to discuss the idea before you start coding.
