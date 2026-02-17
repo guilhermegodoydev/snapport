@@ -62,6 +62,6 @@ Obrigado por se interessar em contribuir! O **Snap-Port** é um projeto **Open S
 
 ## ⚠️ Nota de Manutenção
 
-O Snap-Port é um projeto MVP mantido de forma independente. Contribuições que foquem em performance, correção de bugs de API e acessibilidade têm prioridade na revisão.
+O Snap-Port é um projeto mantido de forma independente. Contribuições que foquem em performance, correção de bugs de API e acessibilidade têm prioridade na revisão.
 
 > Dica: Se você deseja propor uma mudança grande na arquitetura, abra uma Issue para discutirmos a ideia antes de você começar a codar!
