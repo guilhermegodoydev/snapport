@@ -18,7 +18,7 @@
     "./style.css": "./dist/snap-port.css"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite playground",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
