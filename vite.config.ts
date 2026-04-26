@@ -25,5 +25,9 @@ export default defineConfig({
         }
       }
     }
+  },
+  define: {
+    'process.env.NODE_ENV': 'process.env.NODE_ENV',
+    'import.meta.env.MODE': 'import.meta.env.MODE'
   }
 });

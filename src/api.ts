@@ -1,6 +1,8 @@
 import { TECH_MAP } from "./constants";
 import type { SanitizedRepo } from "./types";
 
+const isDev = typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production' || (typeof import.meta !== 'undefined' && import.meta.env?.MODE !== 'production');
+
 interface GithubRepo {
   id: number;
   name: string;
@@ -47,23 +49,33 @@ function clearOldCaches(currentUsername:string): void {
   }
 }
 
-export async function getPortProjects(username: string, tag: string = 'port'): Promise<SanitizedRepo[]> {
+export async function getPortProjects(
+  username: string, 
+  tag: string = 'port',
+  options: { forceRefresh?: boolean } = {} 
+): Promise<SanitizedRepo[]> {
+
   if (!username) {
     console.error("GitHubPortfolio: Username é obrigatório.");
     return [];
   }
 
   const CACHE_KEY = `gh_projects_${username}`;
+  const shouldSkipCache = isDev || options.forceRefresh;
 
   try {
     clearOldCaches(username);
 
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      const { data, timestamp } = JSON.parse(cached) as CacheData;
-      if (Date.now() - timestamp < TWO_HOURS) {
-        return data;
+    if (!shouldSkipCache) {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached) as CacheData;
+        if (Date.now() - timestamp < TWO_HOURS) {
+          return data;
+        }
       }
+    } else if (isDev) {
+      console.info(`[GitHubPortfolio]: Dev mode detectado. Cache ignorado para ${username}.`);
     }
 
     const query = encodeURIComponent(`user:${username} topic:${tag}`);
