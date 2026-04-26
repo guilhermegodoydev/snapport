@@ -1,3 +1,4 @@
+import { TECH_MAP } from "./constants";
 import type { SanitizedRepo } from "./types";
 
 interface GithubRepo {
@@ -16,12 +17,21 @@ interface CacheData {
 
 const TWO_HOURS = 2 * 60 * 60 * 1000;
 
+const getStacks = (topics: string[]) => {
+  if (!topics) return [];
+  
+  const stacks = topics.filter(topic => !!TECH_MAP[topic.toLocaleLowerCase().trim()]);
+
+  return stacks;
+};
+
 const _sanitizeRepo = (item: GithubRepo): SanitizedRepo => ({
   id: item.id,
   name: item.name ?? "Projeto sem nome", 
   description: item.description ?? "Sem descrição disponível",
   htmlUrl: item.html_url,
   topics: Array.isArray(item.topics) ? item.topics : [],
+  stacks: Array.isArray(item.topics) ? getStacks(item.topics) : [],
   deployUrl: item.homepage ?? null,
 });
 

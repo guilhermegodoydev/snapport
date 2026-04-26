@@ -4,7 +4,8 @@ export interface SanitizedRepo {
     description: string | null;
     htmlUrl: string;
     topics: string[];
-    deployUrl: string | null,
+    stacks: string[];
+    deployUrl: string | null;
 }
 
 export interface PortfolioConfig {
