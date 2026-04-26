@@ -23,10 +23,12 @@
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "docs:deploy": "npm run docs:build && gh-pages -d docs/.vitepress/dist"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "gh-pages": "^6.3.0",
     "typescript": "~5.9.3",
     "vite": "^7.2.4",
     "vite-plugin-dts": "^4.5.4",
