@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Snapport",
   description: "Automação de portfólio via GitHub",
-  //base: '/snapport/',
+  base: '/snapport/',
 
   themeConfig: {
     nav: [
