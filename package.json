@@ -2,6 +2,16 @@
   "name": "snapport",
   "private": false,
   "version": "1.0.1",
+  "keywords": [
+    "portfolio",
+    "github-api",
+    "typescript",
+    "zero-dependencies",
+    "automation",
+    "frontend",
+    "showcase",
+    "headless-ui"
+  ],
   "type": "module",
   "files": [
     "dist"
