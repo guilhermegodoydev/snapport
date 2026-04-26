@@ -4,6 +4,7 @@ export default defineConfig({
   title: "Snapport",
   description: "Automação de portfólio via GitHub",
   base: '/snapport/',
+  head: [['meta', { name: 'google-site-verification', content: 'nZLOzlPEznu3x0-mg0zAElrhMAZwHHfU4wsccHs3xJU' }]],
 
   themeConfig: {
     nav: [
