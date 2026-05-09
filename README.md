@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://github.com/guilhermegodoydev/snapport/blob/main/preview.png" width="300" height="300" style="border-radius: 50%" alt="Logo" />
+  <img src="https://github.com/guilhermegodoydev/snapport/blob/main/preview.png" width="120" height="120" style="border-radius: 50%" alt="Logo" />
 </p>
 
 <h1 align="center">Snapport</h1>
 
 <p align="center">
-  <strong>Seu portfólio alimentado automaticamente pelos tópicos do seu GitHub.</strong>
+  <strong>Gere automaticamente a seção de projetos do seu portfólio a partir dos seus repositórios do GitHub.</strong>
 </p>
 
 <p align="center">
@@ -15,42 +15,96 @@
 </p>
 
 <p align="center">
-  <a href="https://guilhermegodoydev.github.io/snapport"><strong>Explorar Documentação »</strong></a>
-  <br /><br />
-  <a href="https://github.com/guilhermegodoydev/snapport/issues">Reportar Bug</a>
-  ·
-  <a href="https://github.com/guilhermegodoydev/snapport/issues">Sugestão de Feature</a>
+  <a href="https://guilhermegodoydev.github.io/snapport"><strong>Ver Documentação »</strong></a>
 </p>
 
 ---
 
-## 💡 Por que Snapport?
+## 💡 O problema
 
-Cansado de atualizar manualmente o HTML do seu portfólio toda vez que termina um projeto? O **Snapport** transforma seus repositórios do GitHub na sua única fonte de verdade. Marque com uma tag, e seu site se atualiza sozinho.
+Manter a seção de projetos do portfólio atualizada manualmente é repetitivo:
 
-- **Zero Dependências:** TypeScript puro. Sem inchaço no seu bundle.
-- **Cache Inteligente:** Persistência local de 2 horas para respeitar os limites da API.
-- **Framework Agnostic:** Use com React, Vue, Angular ou apenas HTML puro.
+- você cria um novo projeto
+- atualiza o GitHub
+- esquece de atualizar o portfólio
+- seu portfólio fica desatualizado
 
-## 🚀 Início Rápido
+---
+
+## ✨ O que o Snapport faz
+
+O Snapport automatiza a geração da seção de projetos do seu portfólio com base nos seus repositórios do GitHub.
+
+Você define onde os projetos serão renderizados e a lib cuida da sincronização.
+
+---
+
+## 🔥 Antes vs Depois
+
+### ❌ Antes (manual)
+
+```html
+<div>
+  <h2>Projetos</h2>
+  <ul>
+    <li>Projeto A</li>
+    <li>Projeto B</li>
+  </ul>
+</div>
+```
+
+### ✅ Depois (automático)
+
+```js
+import { initPortfolio } from 'snapport';
+
+initPortfolio('seu-usuario-github', {
+  tag: 'port',
+  searchContainer: 'meu-search',
+  filtersContainer: 'meu-filters',
+  projectsContainer: 'meu-projects'
+});
+```
+
+---
+
+## 🚀 Início rápido
+
+### Via npm
 
 ```bash
 npm install snapport
 ```
 
-```typescript
+```js
 import { initPortfolio } from 'snapport';
 
-initPortfolio('seu-usuario', {
-  searchContainer: 'search-id',
-  filtersContainer: 'filters-id',
-  projectsContainer: 'projects-id'
+initPortfolio('seu-usuario-github', {
+  tag: 'port',
+  searchContainer: 'meu-search',
+  filtersContainer: 'meu-filters',
+  projectsContainer: 'meu-projects'
 });
 ```
 
-## 🎨 Personalização Visual
+### Via CDN (vanilla JS)
 
-O Snapport é totalmente customizável via **CSS Variables**. Adapte as cores ao seu tema sem esforço:
+```html
+<script type="module">
+  import { initPortfolio } from 'https://cdn.jsdelivr.net/npm/snapport/dist/snap-port.js';
+
+  initPortfolio('seu-usuario-github', {
+    tag: 'port',
+    searchContainer: 'meu-search',
+    filtersContainer: 'meu-filters',
+    projectsContainer: 'meu-projects'
+  });
+</script>
+```
+
+---
+
+## 🎨 Personalização
 
 ```css
 :root {
@@ -60,17 +114,24 @@ O Snapport é totalmente customizável via **CSS Variables**. Adapte as cores ao
 }
 ```
 
-## 🛠️ Stacks Suportadas
+---
 
-A lib reconhece automaticamente ícones e cores oficiais para diversas tecnologias:
-`React` • `TypeScript` • `Node.js` • `Docker` • `Tailwind` • `Sass` • `Python` • `e muito mais...`
+## ⚙️ Características
+
+- Zero dependências em runtime
+- Cache local (2h)
+- Funciona com qualquer framework
+- Baseado em GitHub Topics
+- Leve e direto ao ponto
+
+---
+
+## 🛠 Tecnologias suportadas
+
+React • TypeScript • Node.js • Docker • Tailwind • Python • etc
 
 ---
 
 ## 🤝 Contribuição
 
-Contribuições são o que fazem a comunidade open source um lugar incrível para aprender e criar. Confira nosso [Guia de Contribuição](https://guilhermegodoydev.github.io/snapport/projeto/contribuir.html) para começar.
-
-## 📄 Licença
-
-Distribuído sob a licença MIT. Veja [`LICENSE`](https://github.com/guilhermegodoydev/snapport/blob/main/LICENSE) para mais informações.
+Veja a documentação: [CONTRIBUIR](https://guilhermegodoydev.github.io/snapport/projeto/contribuir.html)
