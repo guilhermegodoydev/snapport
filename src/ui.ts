@@ -1,5 +1,6 @@
 import type { SanitizedRepo } from "./types";
 import { TECH_MAP } from "./constants";
+import { safeTopics } from "./utils";
 
 interface TechInfo {
   icon: string; 
@@ -8,7 +9,19 @@ interface TechInfo {
 }
 
 const _getContainer = (el: HTMLElement | string | null): HTMLElement | null => {
-  if (typeof el === 'string') return document.getElementById(el);
+  if (typeof el === 'string') {
+    const found = document.getElementById(el);
+
+    if (!found) {
+      console.warn(
+        `[Snapport] Container "${el}" não encontrado. ` +
+        `Verifique se o elemento existe no DOM antes de inicializar.`
+      );
+    }
+
+    return found;
+  }
+
   return el;
 };
 
@@ -72,7 +85,7 @@ export function renderSkeleton(containerElement: HTMLElement | string, count: nu
   const container = _getContainer(containerElement);
   if (!container) return;
 
-  container.className = 'ghp-projects-grid'; 
+  container.classList.toggle('ghp-projects-grid', true); 
   container.innerHTML = Array(count).fill('<div class="ghp-project-card ghp-skeleton ghp-skeleton-card"></div>').join("");
 }
 
@@ -80,7 +93,7 @@ export function renderFilters(projects: SanitizedRepo[], containerElement: HTMLE
   const container = _getContainer(containerElement);
   if (!container) return;
 
-  const allTopics = projects.flatMap(p => p.topics || []);
+  const allTopics = projects.flatMap(p => safeTopics(p));
   const uniqueTopics = [...new Set(allTopics)];
 
   const stacksHTML = uniqueTopics.reduce((acc, topic) => {
@@ -133,7 +146,14 @@ export function setupFilters(
   customTemplate?: (repo: SanitizedRepo) => string
 ): void {
   const container = document.getElementById(filterContainerId);
-  if (!container) return;
+  
+  if (!container) {
+    console.warn(
+      `[Snapport] setupFilters falhou: container "${filterContainerId}" não encontrado. ` +
+      `Possíveis causas: renderFilters não foi chamado ou DOM ainda não está pronto.`
+    );
+    return;
+  }
 
   container.addEventListener('click', (e: Event) => {
     const target = e.target as HTMLElement;
@@ -141,7 +161,10 @@ export function setupFilters(
     if (!btn) return;
 
     const topic = btn.dataset.topic;
-    const filtered = topic === 'all' ? allProjects : allProjects.filter(p => p.topics.includes(topic!));
+    const filtered =
+      topic === 'all'
+        ? allProjects
+        : allProjects.filter(p => safeTopics(p).includes(topic!));
 
     renderProjects(filtered, projectContainerId, username, customTemplate);
     
@@ -156,17 +179,26 @@ export function setupSearch(
     username: string,
     customTemplate?: (repo: SanitizedRepo) => string
   ): void {
-  const input = document.getElementById('gh-port-search') as HTMLInputElement;
-  if (!input) return;
+  const tryBind = () => {
+    const input = document.getElementById('gh-port-search') as HTMLInputElement;
 
-  input.addEventListener('input', (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    const term = target.value.toLowerCase();
-    const filtered = allProjects.filter(p => 
-      p.name.toLowerCase().includes(term) || 
-      (p.description || "").toLowerCase().includes(term) ||
-      p.topics.some(t => t.toLowerCase().includes(term))
-    );
-    renderProjects(filtered, projectContainerId, username, customTemplate);
-  });
+    if (!input) return false;
+
+    input.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      const term = target.value.toLowerCase();
+      const filtered = allProjects.filter(p => 
+        p.name.toLowerCase().includes(term) || 
+        (p.description || "").toLowerCase().includes(term) ||
+        safeTopics(p).some(t => t.toLowerCase().includes(term))
+      );
+      renderProjects(filtered, projectContainerId, username, customTemplate);
+    });
+
+    return true;
+  };
+
+  if (!tryBind()) {
+    console.warn('[Snapport] Search input ainda não existe no DOM');
+  }
 }

@@ -56,7 +56,7 @@ export async function getPortProjects(
 ): Promise<SanitizedRepo[]> {
 
   if (!username) {
-    console.error("GitHubPortfolio: Username é obrigatório.");
+    console.error("[Snapport]: Username é obrigatório.");
     return [];
   }
 
@@ -75,7 +75,7 @@ export async function getPortProjects(
         }
       }
     } else if (isDev) {
-      console.info(`[GitHubPortfolio]: Dev mode detectado. Cache ignorado para ${username}.`);
+      console.info(`[Sanpport]: Dev mode detectado. Cache ignorado para ${username}.`);
     }
 
     const query = encodeURIComponent(`user:${username} topic:${tag}`);
@@ -98,11 +98,11 @@ export async function getPortProjects(
 
     return projects;
   } catch (error) {
-    console.error(`GitHubPortfolio: Erro ao buscar dados de ${username}:`, error);
+    console.error(`[Snapport]: Erro ao buscar dados de ${username}:`, error);
     
     const expiredCache = localStorage.getItem(CACHE_KEY);
     if (expiredCache) {
-      console.warn("GitHubPortfolio: Usando cache expirado devido a erro de rede.");
+      console.warn("[Snapport]: Usando cache expirado devido a erro de rede.");
       return (JSON.parse(expiredCache) as CacheData).data;
     }
     

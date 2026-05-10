@@ -4,6 +4,7 @@ export * from './types';
 export { getPortProjects } from './api';
 export { renderFilters, renderProjects, renderSearchBar } from './ui';
 
+import { waitForElement } from './utils';
 import type { PortfolioConfig } from './types';
 import { getPortProjects as fetchProjects } from './api';
 import { 
@@ -32,6 +33,12 @@ export async function initPortfolio(
   try {
 
     const tag = config.tag || 'port';
+
+    await Promise.all([
+      waitForElement(config.searchContainer),
+      waitForElement(config.filtersContainer),
+      waitForElement(config.projectsContainer)
+    ]);
 
     uiSearch(config.searchContainer);
     renderSkeleton(config.projectsContainer, 6);
