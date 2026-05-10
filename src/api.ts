@@ -1,8 +1,6 @@
 import { TECH_MAP } from "./constants";
 import type { SanitizedRepo } from "./types";
 
-const isDev = typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production' || (typeof import.meta !== 'undefined' && import.meta.env?.MODE !== 'production');
-
 interface GithubRepo {
   id: number;
   name: string;
@@ -19,28 +17,33 @@ interface CacheData {
 
 const TWO_HOURS = 2 * 60 * 60 * 1000;
 
-const getStacks = (topics: string[]) => {
-  if (!topics) return [];
-  
-  const stacks = topics.filter(topic => !!TECH_MAP[topic.toLocaleLowerCase().trim()]);
+const getStacks = (topics: string[] = []) => (
+  topics.filter(topic =>
+    !!TECH_MAP[topic?.toLowerCase().trim()]
+  )
+);
 
-  return stacks;
+const _sanitizeRepo = (item: GithubRepo): SanitizedRepo => {
+  const topics = Array.isArray(item.topics) ? item.topics : [];
+
+  return {
+    id: item.id,
+    name: item.name ?? "Projeto sem nome", 
+    description: item.description ?? "Sem descrição disponível",
+    htmlUrl: item.html_url,
+    topics,
+    stacks: getStacks(topics),
+    deployUrl: item.homepage ?? null,
+  };
 };
 
-const _sanitizeRepo = (item: GithubRepo): SanitizedRepo => ({
-  id: item.id,
-  name: item.name ?? "Projeto sem nome", 
-  description: item.description ?? "Sem descrição disponível",
-  htmlUrl: item.html_url,
-  topics: Array.isArray(item.topics) ? item.topics : [],
-  stacks: Array.isArray(item.topics) ? getStacks(item.topics) : [],
-  deployUrl: item.homepage ?? null,
-});
-
-function clearOldCaches(currentUsername:string): void {
+function clearOldCaches(currentUsername: string): void {
   try {
     Object.keys(localStorage).forEach(key => {
-      if (key.startsWith('gh_projects_') && !key.includes(currentUsername)) {
+      if (
+        key.startsWith("gh_projects_") &&
+        key !== `gh_projects_${currentUsername}`
+      ) {
         localStorage.removeItem(key);
       }
     });
@@ -52,7 +55,10 @@ function clearOldCaches(currentUsername:string): void {
 export async function getPortProjects(
   username: string, 
   tag: string = 'port',
-  options: { forceRefresh?: boolean } = {} 
+  options: { 
+    forceRefresh?: boolean;
+    cache?: boolean;
+  } = {} 
 ): Promise<SanitizedRepo[]> {
 
   if (!username) {
@@ -61,21 +67,34 @@ export async function getPortProjects(
   }
 
   const CACHE_KEY = `gh_projects_${username}`;
-  const shouldSkipCache = isDev || options.forceRefresh;
+  const useCache = options.cache !== false;
+  const forceRefresh = options.forceRefresh === true;
+  const shouldUseCache = useCache && !forceRefresh;
 
   try {
     clearOldCaches(username);
-
-    if (!shouldSkipCache) {
+    
+    if (shouldUseCache) {
       const cached = localStorage.getItem(CACHE_KEY);
+      
       if (cached) {
-        const { data, timestamp } = JSON.parse(cached) as CacheData;
-        if (Date.now() - timestamp < TWO_HOURS) {
-          return data;
+        try {
+          const parsed: CacheData = JSON.parse(cached);
+
+          if (
+            parsed &&
+            typeof parsed === "object" &&
+            Array.isArray(parsed.data) &&
+            typeof parsed.timestamp === "number"
+          ) {
+            if (Date.now() - parsed.timestamp < TWO_HOURS) {
+              return parsed.data;
+            }
+          }
+        } catch {
+          localStorage.removeItem(CACHE_KEY);
         }
       }
-    } else if (isDev) {
-      console.info(`[Sanpport]: Dev mode detectado. Cache ignorado para ${username}.`);
     }
 
     const query = encodeURIComponent(`user:${username} topic:${tag}`);
@@ -94,7 +113,9 @@ export async function getPortProjects(
       timestamp: Date.now()
     };
 
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+    if (useCache) {
+      localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+    }
 
     return projects;
   } catch (error) {
@@ -102,8 +123,11 @@ export async function getPortProjects(
     
     const expiredCache = localStorage.getItem(CACHE_KEY);
     if (expiredCache) {
-      console.warn("[Snapport]: Usando cache expirado devido a erro de rede.");
-      return (JSON.parse(expiredCache) as CacheData).data;
+      try {
+        return (JSON.parse(expiredCache) as CacheData).data;
+      } catch {
+        localStorage.removeItem(CACHE_KEY);
+      }
     }
     
     return [];
