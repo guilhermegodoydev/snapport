@@ -16,7 +16,7 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/snap-port.umd.cjs",
+  "main": "./dist/snap-port.js",
   "module": "./dist/snap-port.js",
   "types": "./dist/index.d.ts",
   "exports": {
