@@ -16,16 +16,16 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/snap-port.js",
-  "module": "./dist/snap-port.js",
+  "main": "./dist/snapport.umd.cjs",
+  "module": "./dist/snapport.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/snap-port.js",
-      "require": "./dist/snap-port.umd.cjs"
+      "import": "./dist/snapport.js",
+      "require": "./dist/snapport.umd.cjs"
     },
-    "./style.css": "./dist/snap-port.css"
+    "./style.css": "./dist/snapport.css"
   },
   "scripts": {
     "dev": "vite playground",

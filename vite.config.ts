@@ -14,20 +14,14 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'SnapPort',
-      fileName: 'snap-port',
+      fileName: 'snapport',
       formats: ['es', 'umd']
     },
     rollupOptions: {
-      external: [], 
+      external: [],
       output: {
-        globals: {
-
-        }
+        globals: {}
       }
     }
   },
-  define: {
-    'process.env.NODE_ENV': 'process.env.NODE_ENV',
-    'import.meta.env.MODE': 'import.meta.env.MODE'
-  }
 });
