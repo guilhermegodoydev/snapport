@@ -72,12 +72,17 @@ initPortfolio('seu-usuario-github', {
 
 ### Via npm
 
+Instale o pacote:
+
 ```bash
 npm install snapport
 ```
 
+No seu arquivo JavaScript/TypeScript, importe o JS e o CSS:
+
 ```js
 import { initPortfolio } from 'snapport';
+import 'snapport/dist/style.css';
 
 initPortfolio('seu-usuario-github', {
   tag: 'port',
@@ -89,9 +94,15 @@ initPortfolio('seu-usuario-github', {
 
 ### Via CDN (vanilla JS)
 
+No seu HTML, inclua o CSS no `<head>` e o script no `<body>`:
+  
 ```html
+<!-- No seu <head> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/snapport/dist/style.css"/>
+
+<!-- No final do <body> -->
 <script type="module">
-  import { initPortfolio } from 'https://cdn.jsdelivr.net/npm/snapport/dist/snap-port.js';
+  import { initPortfolio } from 'https://cdn.jsdelivr.net/npm/snapport/dist/snapport.js';
 
   initPortfolio('seu-usuario-github', {
     tag: 'port',

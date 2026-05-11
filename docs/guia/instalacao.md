@@ -14,9 +14,8 @@ Após instalar, importe a lógica e os estilos no seu projeto:
 
 ```typescript
 import { initPortfolio } from 'snapport';
-import 'snapport/dist/index.css';
+import 'snapport/style.css';
 
-// Inicialização básica
 initPortfolio('seu-usuario-github', {
   searchContainer: 'id-da-busca',
   filtersContainer: 'id-dos-filtros',
@@ -30,7 +29,7 @@ Esta é a forma mais simples de adicionar a biblioteca ao seu site. Utilize `typ
 
 ```html
 <!-- 1. Estilos da Biblioteca -->
-<link rel="stylesheet" href="https://jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/snapport/dist/snapport.css">
 
 <!-- 2. Estrutura HTML -->
 <div id="meu-search"></div>
@@ -39,13 +38,13 @@ Esta é a forma mais simples de adicionar a biblioteca ao seu site. Utilize `typ
 
 <!-- 3. Lógica e Inicialização -->
 <script type="module">
-  import { initPortfolio } from 'https://jsdelivr.net';
+  import { initPortfolio } from 'https://cdn.jsdelivr.net/npm/snapport/dist/snapport.js';
 
   initPortfolio('seu-usuario-github', {
-    tag: 'port',                      // Opcional: padrão é 'port'
-    searchContainer: 'meu-search',     // ID do container de busca
-    filtersContainer: 'meu-filters',   // ID do container de filtros
-    projectsContainer: 'meu-projects'  // ID do grid de projetos
+    tag: 'port',
+    searchContainer: 'meu-search',
+    filtersContainer: 'meu-filters',
+    projectsContainer: 'meu-projects'
   });
 </script>
 ```
