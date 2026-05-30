@@ -1,10 +1,97 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: "Snapport",
-  description: "Automação de portfólio via GitHub",
+  title: "Snapport | Automação de Portfólio com GitHub",
+  description: "Automatize a criação da seção de projetos do seu portfólio usando dados dos seus repositórios do GitHub.",
   base: '/snapport/',
-  head: [['meta', { name: 'google-site-verification', content: 'nZLOzlPEznu3x0-mg0zAElrhMAZwHHfU4wsccHs3xJU' }]],
+  head: [
+    [
+      'meta', 
+      { 
+        name: 'google-site-verification', 
+        content: 'nZLOzlPEznu3x0-mg0zAElrhMAZwHHfU4wsccHs3xJU' 
+      },
+    ],
+
+    [
+      'meta',
+      {
+        name: 'description',
+        content:
+          'Generate portfolio project sections automatically from GitHub repositories.'
+      }
+    ],
+
+    [
+      'meta',
+      {
+        property: 'og:title',
+        content: 'Snapport'
+      }
+    ],
+    [
+      'meta',
+      {
+        property: 'og:description',
+        content:
+          'Generate portfolio project sections automatically from GitHub repositories.'
+      }
+    ],
+    [
+      'meta',
+      {
+        property: 'og:type',
+        content: 'website'
+      }
+    ],
+    [
+      'meta',
+      {
+        property: 'og:url',
+        content: 'https://guilhermegodoydev.github.io/snapport/'
+      }
+    ],
+
+    [
+      'script',
+      { type: 'application/ld+json' },
+      JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+
+        name: 'Snapport',
+        url: 'https://guilhermegodoydev.github.io/snapport/',
+        description:
+          'Generate portfolio project sections automatically from GitHub repositories.',
+
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'All',
+
+        programmingLanguage: [
+          'JavaScript',
+          'TypeScript'
+        ],
+
+        codeRepository:
+          'https://github.com/guilhermegodoydev/snapport',
+
+        license:
+          'https://opensource.org/licenses/MIT',
+
+        author: {
+          '@type': 'Person',
+          name: 'Guilherme Godoy',
+          url: 'https://github.com/guilhermegodoydev'
+        },
+
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD'
+        }
+      })
+    ]
+  ],
 
   sitemap: {
     hostname: 'https://guilhermegodoydev.github.io/snapport/'
