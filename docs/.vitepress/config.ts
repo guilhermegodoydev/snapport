@@ -6,6 +6,10 @@ export default defineConfig({
   base: '/snapport/',
   head: [['meta', { name: 'google-site-verification', content: 'nZLOzlPEznu3x0-mg0zAElrhMAZwHHfU4wsccHs3xJU' }]],
 
+  sitemap: {
+    hostname: 'https://guilhermegodoydev.github.io/snapport/'
+  },
+
   themeConfig: {
     nav: [
       { text: 'Início', link: '/' },
