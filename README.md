@@ -15,7 +15,9 @@
 </p>
 
 <p align="center">
-  <a href="https://guilhermegodoydev.github.io/snapport"><strong>Ver Documentação »</strong></a>
+  <a href="https://guilhermegodoydev.github.io/snapport"><strong>Ver Documentação</strong></a>
+  <span>|</span>
+  <a href="https://www.npmjs.com/package/snapport"><strong>NPM</strong></a>
 </p>
 
 ---
