@@ -131,9 +131,7 @@ No seu HTML, inclua o CSS no `<head>` e o script no `<body>`:
 
 - Zero dependências em runtime
 - Cache local (2h)
-- Funciona com qualquer framework
 - Baseado em GitHub Topics
-- Leve e direto ao ponto
 
 ---
 
